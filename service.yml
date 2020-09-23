@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  # NodePort, ClusterIP, LoadBalancer
+  type: NodePort
+  ports:
+      # destination port, the port pod will receive request from
+    - targetPort: 80
+      # optional, would match 80 if not specified, this is the port the service object open to
+      port: 80
+      # optional, kubernetes will auto-assign nodePort if not specified
+      nodePort: 30008
+  selector:
+    # service forward request to pod(s) with these labels
+    app: myapp
+    type: frontend
